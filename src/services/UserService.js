@@ -2,7 +2,6 @@ import UserModel from "../models/UserModel.js";
 import generateToken from "../utils/token/generateToken.js";
 
 const Model = UserModel;
-const collection = Model.collection.collectionName;
 
 export async function Registration(reqBody, response) {
   try {
@@ -18,11 +17,10 @@ export async function Registration(reqBody, response) {
 
 export async function Login(reqBody, response) {
   try {
-    const data = await Model.find(reqBody, "email").count();
-    console.log(reqBody.email);
-    if (data === 1 && reqBody.email) {
-      // Generate a JWT token with the User Payload
-      response.send({ status: "success", data: generateToken(reqBody.email) });
+    const { email } = reqBody;
+    const data = await Model.find({ email }, "email").count();
+    if (data === 1 && email) {
+      response.send({ status: "success", data: generateToken(email) });
     } else {
       response.send({
         status: "fail",

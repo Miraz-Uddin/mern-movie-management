@@ -23,12 +23,12 @@ export default async function SendEmailUtility(to, text, subject) {
     },
   });
 
-  const options = {
-    from: `Movie Manager<${host}>`,
+  const messageTemplate = {
+    from: `Movie Manager<${user}>`,
     to,
     subject,
     text,
   };
 
-  return await transporter.sendMail(options);
+  return await transporter.sendMail(messageTemplate);
 }

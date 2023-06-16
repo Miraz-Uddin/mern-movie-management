@@ -1,3 +1,4 @@
+import { SendOTP } from "../services/OTPService.js";
 import {
   GetProfileInfo,
   Login,
@@ -32,6 +33,17 @@ export async function login(req, res) {
 export async function getProfileData(req, res) {
   try {
     await GetProfileInfo(req, res);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+/**
+ * OTP Send
+ */
+export async function sendVerificationOTP(req, res) {
+  try {
+    await SendOTP(req, res);
   } catch (error) {
     console.log(error);
   }

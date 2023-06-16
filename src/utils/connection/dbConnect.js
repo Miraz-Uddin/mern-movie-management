@@ -12,9 +12,9 @@ export default function dbConnect() {
     () => {
       console.log("Database Connected");
     },
-    (err) => {
+    (error) => {
       console.log("Error While Connecting Database !!!");
-      console.log(e);
+      console.log(error);
     }
   );
 }
