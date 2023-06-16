@@ -4,12 +4,11 @@ import defaultSchema from "../config/defaultSchema.js";
 const Schema = mongoose.Schema(
   {
     name: { type: String, required: true },
-    price: { type: Number, required: true },
-    description: { type: String },
+    age: { type: Number, required: true },
   },
   defaultSchema
 );
 
-const ProductModel = new mongoose.model("Product", Schema);
+const UserModel = new mongoose.model("User", Schema);
 
-export default ProductModel;
+export default UserModel;

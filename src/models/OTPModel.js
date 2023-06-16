@@ -1,18 +1,15 @@
 import mongoose from "mongoose";
+import defaultSchema from "../config/defaultSchema.js";
 
-const collection = "Otp";
+const Schema = mongoose.Schema(
+  {
+    email: { type: String },
+    otp: { type: String },
+    status: { type: Number, default: 0 },
+  },
+  defaultSchema
+);
 
-const Schema = mongoose.Schema({
-  name: { type: String, required: true },
-  price: { type: Number, required: true },
-  description: { type: String },
-  createdAt: { type: Date, default: Date.now },
-});
-
-const OTPModel = new mongoose.model(collection, Schema);
-
-export function getCollectionName() {
-  return collection;
-}
+const OTPModel = new mongoose.model("Otp", Schema);
 
 export default OTPModel;

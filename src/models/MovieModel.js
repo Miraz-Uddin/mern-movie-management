@@ -1,18 +1,14 @@
 import mongoose from "mongoose";
+import defaultSchema from "../config/defaultSchema.js";
 
-const collection = "Movie";
+const Schema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    year: { type: Number, required: true },
+  },
+  defaultSchema
+);
 
-const Schema = mongoose.Schema({
-  name: { type: String, required: true },
-  price: { type: Number, required: true },
-  description: { type: String },
-  createdAt: { type: Date, default: Date.now },
-});
-
-const MovieModel = new mongoose.model(collection, Schema);
-
-export function getCollectionName() {
-  return collection;
-}
+const MovieModel = new mongoose.model("Movie", Schema);
 
 export default MovieModel;

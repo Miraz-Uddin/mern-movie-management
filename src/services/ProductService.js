@@ -1,7 +1,7 @@
-import ProductModel, { getCollectionName } from "../models/ProductModel.js";
+import ProductModel from "../models/ProductModel.js";
 
-const collection = getCollectionName();
 const Model = ProductModel;
+const collection = ProductModel.collection.collectionName;
 
 export async function Search(filter = {}, selected = "") {
   let status = "fail";
@@ -10,8 +10,7 @@ export async function Search(filter = {}, selected = "") {
   let data = {};
 
   try {
-    const response = await Model.find(filter)
-      .select(selected)
+    await Model.find(filter, selected)
       .then((result) => {
         status = "success";
         code = 200;
@@ -24,7 +23,7 @@ export async function Search(filter = {}, selected = "") {
       });
   } catch (error) {
     console.log(error);
-    message = `Error while finding ${collection}s Data`;
+    message = `Error while finding ${collection} Data`;
   }
   return {
     code,
@@ -40,8 +39,7 @@ export async function SearchById(id, selected = "") {
   let message = "";
   let data = {};
   try {
-    const response = await Model.findById(id)
-      .select(selected)
+    const response = await Model.findById(id, selected)
       .then((result) => {
         status = "success";
         code = 200;
@@ -57,7 +55,7 @@ export async function SearchById(id, selected = "") {
       });
   } catch (error) {
     console.log(error);
-    message = `Error while finding ${collection}'s Data`;
+    message = `Error while finding ${collection} Data`;
   }
   return {
     code,
