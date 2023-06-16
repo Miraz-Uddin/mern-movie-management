@@ -1,5 +1,34 @@
-import React from "react";
+import nodemailer from "nodemailer";
 
-export default function SendEmailUtility() {
-  return <div>SendEmailUtility</div>;
+export default async function SendEmailUtility(to, text, subject) {
+  const {
+    MAIL_HOST: host,
+    MAIL_PORT: port,
+    MAIL_SECURE: secure,
+    MAIL_USER: user,
+    MAIL_PASS: pass,
+    MAIL_TLS: rejectUnauthorized,
+  } = process.env;
+
+  const transporter = nodemailer.createTransport({
+    host,
+    port: Number(port),
+    secure: secure === "true" ? true : false,
+    auth: {
+      user,
+      pass,
+    },
+    tls: {
+      rejectUnauthorized: rejectUnauthorized === "false" ? false : true,
+    },
+  });
+
+  const options = {
+    from: `Movie Manager<${host}>`,
+    to,
+    subject,
+    text,
+  };
+
+  return await transporter.sendMail(options);
 }
