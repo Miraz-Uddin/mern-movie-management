@@ -1,10 +1,17 @@
 import mongoose from "mongoose";
 import defaultSchema from "../config/defaultSchema.js";
+import statusString from "../config/enum/statusString.js";
 
 const Schema = mongoose.Schema(
   {
-    name: { type: String, required: true },
-    age: { type: Number, required: true },
+    name: { type: String },
+    email: { type: String, unique: true },
+    status: {
+      type: String,
+      enum: statusString,
+      default: "Active",
+      required: true,
+    },
   },
   defaultSchema
 );
