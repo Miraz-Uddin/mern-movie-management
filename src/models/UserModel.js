@@ -4,8 +4,10 @@ import statusString from "../config/enum/statusString.js";
 
 const Schema = mongoose.Schema(
   {
-    name: { type: String },
-    email: { type: String, unique: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String },
+    email: { type: String, unique: true, required: true },
+    password: { type: String, required: true },
     status: {
       type: String,
       enum: statusString,

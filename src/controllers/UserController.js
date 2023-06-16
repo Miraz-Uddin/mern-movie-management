@@ -1,13 +1,26 @@
-import { GetProfileInfo, Login } from "../services/UserService.js";
+import {
+  GetProfileInfo,
+  Login,
+  Registration,
+} from "../services/UserService.js";
+
+/**
+ * Register
+ */
+export async function register(req, res) {
+  try {
+    await Registration(req.body, res);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 /**
  * Login
  */
 export async function login(req, res) {
   try {
-    const { id } = req.body;
-    const { status, code, message, data } = await Login(id);
-    res.status(code).send({ status, message, data });
+    await Login(req.body, res);
   } catch (error) {
     console.log(error);
   }
@@ -18,8 +31,7 @@ export async function login(req, res) {
  */
 export async function getProfileData(req, res) {
   try {
-    const { status, code, message, data } = await GetProfileInfo(req.user);
-    res.status(code).send({ status, message, data });
+    await GetProfileInfo(req, res);
   } catch (error) {
     console.log(error);
   }

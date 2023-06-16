@@ -1,7 +1,7 @@
 import ProductModel from "../models/ProductModel.js";
 
 const Model = ProductModel;
-const collection = ProductModel.collection.collectionName;
+const collection = Model.collection.collectionName;
 
 export async function Search(filter = {}, selected = "") {
   let status = "fail";
