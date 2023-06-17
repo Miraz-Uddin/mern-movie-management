@@ -8,10 +8,7 @@ export async function Registration(reqBody, response) {
     const data = await Model.create(reqBody);
     response.send({ status: "success", data });
   } catch (error) {
-    response.send({
-      status: "fail",
-      data: error,
-    });
+    response.send({ status: "fail", data: error });
   }
 }
 
@@ -28,10 +25,7 @@ export async function Login(reqBody, response) {
       });
     }
   } catch (error) {
-    response.send({
-      status: "fail",
-      data: error,
-    });
+    response.send({ status: "fail", data: error });
   }
 }
 
@@ -41,9 +35,6 @@ export async function GetProfileInfo(request, response) {
     const data = await Model.findOne({ email }, "firstName lastName email");
     response.send({ status: "success", data });
   } catch (error) {
-    response.send({
-      status: "fail",
-      data: error,
-    });
+    response.send({ status: "fail", data: error });
   }
 }

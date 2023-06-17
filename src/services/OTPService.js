@@ -16,9 +16,21 @@ export async function SendOTP(request, response) {
     );
     response.send({ status: "success", data });
   } catch (error) {
-    response.send({
-      status: "fail",
-      data: error,
-    });
+    response.send({ status: "fail", data: error });
+  }
+}
+
+export async function VerifyOTP(request, response) {
+  try {
+    const { otp, email } = request.params;
+    const acknowledged = await Model.find({ email, otp, status: 0 }).count();
+    if (acknowledged === 1) {
+      await Model.updateOne({ email, otp, status: 0 }, { status: 1 });
+      response.send({ status: "success", data: "Verification Success" });
+    } else {
+      response.send({ status: "fail", data: "Already Used" });
+    }
+  } catch (error) {
+    response.send({ status: "fail", data: error });
   }
 }

@@ -10,6 +10,7 @@ import {
 import {
   getProfileData,
   login,
+  otpVerify,
   register,
   sendVerificationOTP,
 } from "../controllers/UserController.js";
@@ -27,6 +28,7 @@ router.delete("/products/:id", deleteProduct);
 router.post("/login", login);
 router.post("/registration", register);
 router.get("/send-otp/:email", sendVerificationOTP);
+router.get("/verify-otp/:email/:otp", otpVerify);
 
 // Auth Required
 router.get("/profile", AuthVerifyMiddleware, getProfileData);
